@@ -44,10 +44,10 @@ const questions = [
 },
 
 {   
-    type: 'input',
+    type: 'list',
     name:'license',
     message: 'Choose your license',
-    choice: ['MIT', 'Mozilla', 'Modified BSD', 'Zlib', 'None'],
+    choices: ['MIT', 'Mozilla', 'Modified BSD', 'Zlib', 'None'],
 
 },
 {
@@ -59,20 +59,20 @@ const questions = [
 {
     type: 'input',
     name: 'email',
-    message: 'Please enter your email address fir people to contact you with questions:',
+    message: 'Please enter your email address for people to contact you with questions:',
 },
 ];
 
 // function to write README file
 function writeToFile(fileName, data) {
-    fs.writeToFile(fileName, data, (error) => {
-        if (error) {
-            console.log(error);
-            return;
-    }
-    console.log(`File ${fileName} has been generated!`);
-});
-}
+    fs.writeFile(fileName, data, (error) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      console.log(`File ${fileName} has been generated!`);
+    });
+  }
 // function to initialize app
 function init() {
     inquirer.prompt(questions)
