@@ -18,13 +18,6 @@ const questions = [
     name: 'description',
     message: 'Please enter a description of your project',
 },
-
-{
-    type: 'input',
-    name: 'projectName',
-    message: 'What is the name of your project?',
-},
-
 {
     type: 'input',
     name: 'installation',
@@ -54,7 +47,7 @@ const questions = [
     type: 'input',
     name:'license',
     message: 'Choose your license',
-    choice: ['MIT', 'Apache', 'GPL', 'BSD', 'None'],
+    choice: ['MIT', 'Mozilla', 'Modified BSD', 'Zlib', 'None'],
 
 },
 {
@@ -80,8 +73,18 @@ function writeToFile(fileName, data) {
     console.log(`File ${fileName} has been generated!`);
 });
 }
-// TODO: Create a function to initialize app
-function init() {}
+// function to initialize app
+function init() {
+    inquirer.prompt(questions)
+    .then((answers)=> {
+        const fileName = 'README.md';
+        const data = generateMarkdown(answers);
+        writeToFile(fileName, data);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
 
 // Function call to initialize app
 init();
